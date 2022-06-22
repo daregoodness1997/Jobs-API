@@ -40,11 +40,12 @@ app.use(xss());
 // routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authMiddleware, jobsRouter);
-app.use('/api-docs', swaggerUI.setup(swagerDocument));
 
 app.get('/', (req, res) => {
-  res.send('<h1>Jobs API<h1> <a href="/api-docs>Documentation</a>"');
+  res.send('<h1>Jobs API<h1><a href="/api-docs">Documentation</a>"');
 });
+
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swagerDocument));
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
